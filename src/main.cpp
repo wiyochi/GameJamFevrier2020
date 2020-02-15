@@ -5,7 +5,7 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-
+    window.setFramerateLimit(120);
     World w;
 
     while (window.isOpen())
@@ -16,6 +16,10 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+
+        w.update();
+
+
 
         window.clear();
         window.draw(w);
