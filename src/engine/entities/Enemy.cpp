@@ -3,10 +3,23 @@
 Enemy::Enemy(sf::Vector2f const & size) : Entity(size), _shots_cpt(0)
 {
     _sprite.setTexture(TextureManager::getInstance().getTexture("enemies/1/1"));
+    _path = new Path(this);
+
+    _path->addPosition(sf::Vector2f(50, 50));
+    _path->addPosition(sf::Vector2f(0, 400));
+    _path->addPosition(sf::Vector2f(-200, -50));
+    _path->addPosition(sf::Vector2f(150, -400));
+}
+
+Enemy::~Enemy()
+{
+    delete _path;
 }
 
 void Enemy::update()
 {
+    _path->update();
+
     constexpr auto max_dt = 120;
     if (_shots_cpt == 0)
     {

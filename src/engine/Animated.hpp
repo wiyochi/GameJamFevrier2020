@@ -13,8 +13,7 @@ public:
     void update();
 
 private:
-    static unsigned frameCounter;
-
+    unsigned _frameCounter;
     sf::RectangleShape& _shape;
     const unsigned _frameNumber;
     unsigned _textureFrame;
