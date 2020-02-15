@@ -41,19 +41,27 @@ void Player::move_inputs()
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) // Monte
         {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) // Diag gauche
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) && sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            {
+                move(0, -max_speed);
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) // Diag gauche
             {
                 if (!sf::Keyboard::isKeyPressed(sf::Keyboard::D))
                     move(-diag_speed, -diag_speed);
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) // Diag droite
                 move(diag_speed, -diag_speed);
-            else
+            else 
                 move(0, -max_speed);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) // Descend
         {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) // Diag gauche
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) && sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            {
+                move(0, max_speed);
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) // Diag gauche
             {
                 if (!sf::Keyboard::isKeyPressed(sf::Keyboard::D))
                     move(-diag_speed, diag_speed);
