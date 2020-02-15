@@ -8,16 +8,18 @@ void keskecestcommetouche();
 
 #include "engine/World.hpp"
 
+enum STATE { MENU, GAME};
+
 int main()
 {
+    STATE state = MENU;
     sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!", sf::Style::Fullscreen);
     window.setFramerateLimit(120);
-	window.setVerticalSyncEnabled(true);
     World w;
 
     Menu m(sf::Vector2f(100, 10), sf::Vector2f(200, 40)); 
 
-    m.addOption("rien", [](){ std::cout << "Bouton 1" << std::endl; });
+    m.addOption("Démarrer", [&](){ state = GAME;});!
     m.addOption("rien", [](){ std::cout << "ouai Bouton 2" << std::endl; });
     m.addOption("rien", [](){ std::cout << "3" << std::endl; });
     m.addOption("Quitter", [](){ exit(0); });   
@@ -31,12 +33,16 @@ int main()
                 window.close();
         }
 
-        w.update();
-        m.update();
+        if (state == GAME)
+            w.update();
+        if (state == MENU)
+            m.update();
 
         window.clear();
-        window.draw(m);
-        window.draw(w);
+        if (state == MENU)
+            window.draw(m);
+        if (state == GAME)
+            window.draw(w);
         window.display();
     }
 
