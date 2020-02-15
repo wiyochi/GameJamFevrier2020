@@ -80,6 +80,21 @@ void Player::move_inputs()
     }
 }
 
+void Player::move(float x, float y)
+{
+    if (x > 0 && _sprite.getPosition().x + _sprite.getSize().x / 2 >= 1920) x = 0;
+    if (x < 0 && _sprite.getPosition().x - _sprite.getSize().x / 2 <= -10) x = 0;
+
+    if (y > 0 && _sprite.getPosition().y + _sprite.getSize().y / 2 >= 1030) y = 0;
+    if (y < 0 && _sprite.getPosition().y - _sprite.getSize().y / 2 <= 50) y = 0;
+    Entity::move(x, y);
+}
+
+void Player::move(sf::Vector2f const & speed)
+{
+    move(speed.x, speed.y);
+}
+
 void Player::shot_inputs()
 {
     if (sf::Joystick::isConnected(0))

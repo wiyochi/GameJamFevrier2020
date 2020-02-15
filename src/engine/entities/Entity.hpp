@@ -12,8 +12,8 @@ public:
     virtual void update();
     void draw(sf::RenderTarget &, sf::RenderStates) const override;
 
-    void move(sf::Vector2f const &);
-    void move(float x, float y);
+    virtual void move(sf::Vector2f const &);
+    virtual void move(float x, float y);
     void setPosition(float x, float y) {_sprite.setPosition(x, y);};
 
     bool colide(Entity *) const;

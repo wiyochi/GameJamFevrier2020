@@ -39,5 +39,7 @@ public:
     void shot();
 
     void decreaseLife();
+    void move(float x, float y) override;
+    void move(sf::Vector2f const &) override;
     int getLife() {return _life;}
 };
