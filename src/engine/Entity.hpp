@@ -4,7 +4,7 @@
 
 class Entity : public sf::Drawable
 {
-private:
+protected:
     sf::RectangleShape _sprite;
 public:
     Entity();

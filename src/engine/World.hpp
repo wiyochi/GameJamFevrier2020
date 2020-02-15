@@ -13,4 +13,5 @@ public:
     World();
     void draw(sf::RenderTarget &, sf::RenderStates) const override;
     void update();
+    Player & getPlayer() {return _player;}
 };

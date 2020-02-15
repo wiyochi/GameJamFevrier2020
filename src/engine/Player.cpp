@@ -2,15 +2,19 @@
 
 float Player::diag_speed = max_speed * max_speed / sqrt(max_speed * max_speed + max_speed * max_speed);
 
-Player::Player()
+Player::Player() : Entity(), _shots_cpt(0)
 {
-
+    _sprite.setFillColor(sf::Color::Blue);
 }
 
-void Player::update()
+void Player::delete_shots()
 {
+   _shots.erase(std::remove_if(_shots.begin(), _shots.end(), [](Shot * s) {return s->isDead();}), _shots.end());
+}
 
-    if (sf::Joystick::isConnected(0))
+void Player::move_inputs()
+{
+     if (sf::Joystick::isConnected(0))
     {
         float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
         float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
@@ -60,4 +64,52 @@ void Player::update()
                 move(0, max_speed);
         }
     }
+}
+
+void Player::shot_inputs()
+{
+    if (sf::Joystick::isConnected(0))
+    {
+        if (sf::Joystick::isButtonPressed(0, 0) && _shots_cpt == 0)
+        {
+            shot();
+        }
+    } else
+    {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && _shots_cpt == 0)
+        {
+            shot();
+        }
+    }
+
+
+    if (_shots_cpt != 0)
+        _shots_cpt--;
+}
+
+void Player::shot()
+{
+    constexpr int max_dT = 10;
+    if (_shots_cpt == 0)
+    {
+        _shots.push_back(new Shot());
+        _shots_cpt = max_dT;
+    }
+}
+
+void Player::update()
+{
+    move_inputs();
+    shot_inputs();
+    delete_shots();
+
+    for (auto && s : _shots)
+        s->update();
+}   
+
+void Player::draw(sf::RenderTarget & target, sf::RenderStates states) const
+{
+    Entity::draw(target, states);
+    for (auto&& s : _shots)
+        target.draw(*s);
 }
