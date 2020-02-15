@@ -12,6 +12,7 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!", sf::Style::Fullscreen);
     window.setFramerateLimit(120);
+	window.setVerticalSyncEnabled(true);
     World w;
 
     Menu m(sf::Vector2f(100, 10), sf::Vector2f(200, 40)); 
@@ -19,7 +20,7 @@ int main()
     m.addOption("rien", [](){ std::cout << "Bouton 1" << std::endl; });
     m.addOption("rien", [](){ std::cout << "ouai Bouton 2" << std::endl; });
     m.addOption("rien", [](){ std::cout << "3" << std::endl; });
-    m.addOption("rien", [](){ std::cout << "Bouton 212546" << std::endl; });   
+    m.addOption("Quitter", [](){ exit(0); });   
 
     while (window.isOpen())
     {
