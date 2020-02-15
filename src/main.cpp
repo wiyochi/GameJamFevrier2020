@@ -10,7 +10,7 @@ void keskecestcommetouche();
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!", sf::Style::Fullscreen);
     window.setFramerateLimit(120);
     World w;
 
@@ -46,7 +46,7 @@ void keskecestcommetouche()
 {
     if (sf::Joystick::isConnected(0))
     {
-        for (int i = 0; i < sf::Joystick::getButtonCount(0); i++)
+        for (unsigned i = 0; i < sf::Joystick::getButtonCount(0); i++)
         {
             if (sf::Joystick::isButtonPressed(0, i))
             {

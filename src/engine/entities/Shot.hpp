@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entity.hpp"
+#include "../../graphics/TextureManager.hpp"
 
 class Shot : public Entity
 {

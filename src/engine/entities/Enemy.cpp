@@ -2,7 +2,7 @@
 
 Enemy::Enemy(sf::Vector2f const & size) : Entity(size), _shots_cpt(0)
 {
-
+    _sprite.setTexture(TextureManager::getInstance().getTexture("enemies/1/1"));
 }
 
 void Enemy::update()

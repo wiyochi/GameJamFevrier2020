@@ -2,9 +2,15 @@
 
 float Player::diag_speed = max_speed * max_speed / sqrt(max_speed * max_speed + max_speed * max_speed);
 
-Player::Player() : Entity(), _shots_cpt(0), _life(max_life)
+Player::Player() : Entity(sf::Vector2f(200, 200)), _shots_cpt(0), _life(max_life)
 {
-    _sprite.setFillColor(sf::Color::Blue);
+    //_sprite.setTexture(TextureManager::getInstance().getTexture("player/1"));
+    _animation = new Animated(_sprite, "player", 12);
+}
+
+Player::~Player()
+{
+    delete _animation;
 }
 
 void Player::delete_shots()
@@ -122,6 +128,7 @@ void Player::decreaseLife()
 
 void Player::update()
 {
+    _animation->update();
     move_inputs();
     shot_inputs();
     delete_shots();

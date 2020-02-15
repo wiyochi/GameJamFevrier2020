@@ -7,6 +7,8 @@
 
 #include "Shot.hpp"
 #include "Entity.hpp"
+#include "../../graphics/TextureManager.hpp"
+#include "../Animated.hpp"
 
 
 class Player : public Entity
@@ -17,6 +19,8 @@ private:
     static float diag_speed;
     static constexpr float speed_coef = max_speed / 100;
     static constexpr int zero_zone = 10;
+
+    Animated* _animation;
 
     std::vector<Shot *> _shots;
 
@@ -29,6 +33,7 @@ private:
     void delete_shots();
 public:
     Player();
+    ~Player();
     void update() override;
     void draw(sf::RenderTarget &, sf::RenderStates) const override;
     void shot();

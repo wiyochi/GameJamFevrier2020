@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "Entity.hpp"
+#include "../../graphics/TextureManager.hpp"
 #include "Shot.hpp"
 
 class Enemy : public Entity
