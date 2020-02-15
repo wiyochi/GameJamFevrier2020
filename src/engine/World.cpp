@@ -2,7 +2,7 @@
 
 World::World()
 {
-    auto pe = new Enemy(sf::Vector2f(10, 10));
+    auto pe = new Enemy(sf::Vector2f(50, 50));
     _enemis.push_back(pe);
     pe->setPosition(300, 100);
 }
