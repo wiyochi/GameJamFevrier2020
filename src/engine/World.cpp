@@ -19,6 +19,7 @@ void World::update()
     _player.update();
     for (auto && pe : _enemis)
     {
+        pe->update();
         if (_player.colide(pe))
         {
             _player.decreaseLife();
