@@ -25,27 +25,32 @@ void Path::addPosition(sf::Vector2f const & pos)
 {
     _positions.push_back(pos);
     _objective = _positions[0];
+
+    float angle = std::atan(_positions[_positionIndex].y / _positions[_positionIndex].x);
+    _movement.x = std::abs(std::cos(angle) * speed) * ((_objective.x < 0) ? -1.f : 1.f);
+    _movement.y = std::abs(std::sin(angle) * speed) * ((_objective.y < 0) ? -1.f : 1.f);
 }
 
 void Path::update()
 {
     if (std::abs(_objective.x) >= eps_x)
     {
-        float angle = std::atan(_positions[_positionIndex].y / _positions[_positionIndex].x);
-        float nx = std::abs(std::cos(angle) * speed) * ((_objective.x < 0) ? -1.f : 1.f);
-        _entity->move(nx, 0);
-        _objective.x -= nx;
+        _entity->move(_movement.x, 0);
+        _objective.x -= _movement.x;
     }
     if (std::abs(_objective.y) >= eps_y)
     {
-        float ny = std::abs(std::sin(std::atan(_positions[_positionIndex].y / _positions[_positionIndex].x)) * speed) * ((_objective.y < 0) ? -1.f : 1.f);
-        _entity->move(0, ny);
-        _objective.y -= ny;
+        _entity->move(0, _movement.y);
+        _objective.y -= _movement.y;
     }
 
     if (std::abs(_objective.y) < eps_y && std::abs(_objective.x) < eps_x)
     {
         _positionIndex = (_positionIndex + 1) % _positions.size();
         _objective = _positions[_positionIndex];
+
+        float angle = std::atan(_positions[_positionIndex].y / _positions[_positionIndex].x);
+        _movement.x = std::abs(std::cos(angle) * speed) * ((_objective.x < 0) ? -1.f : 1.f);
+        _movement.y = std::abs(std::sin(angle) * speed) * ((_objective.y < 0) ? -1.f : 1.f);
     }
 }

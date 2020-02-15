@@ -26,6 +26,7 @@ private:
     sf::Vector2f _objective;
     Entity * _entity;
     unsigned _positionIndex;
+    sf::Vector2f _movement;
 };
 
 #endif
