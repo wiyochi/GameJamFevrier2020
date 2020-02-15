@@ -5,6 +5,6 @@ Enemy::Enemy(sf::Vector2f const & size) : Entity(size)
 
 }
 
-void update()
+void Enemy::update()
 {
 }

@@ -2,7 +2,7 @@
 
 float Player::diag_speed = max_speed * max_speed / sqrt(max_speed * max_speed + max_speed * max_speed);
 
-Player::Player() : Entity(), _shots_cpt(0)
+Player::Player() : Entity(), _shots_cpt(0), _life(max_life)
 {
     _sprite.setFillColor(sf::Color::Blue);
 }
@@ -104,6 +104,21 @@ void Player::shot()
         pos.x += _sprite.getSize().x / 2 + 5;
         _shots.push_back(new Shot(pos));
         _shots_cpt = max_dT;
+    }
+}
+
+void Player::decreaseLife()
+{  
+    constexpr int max_dT = 60;
+    if (_life > 0) 
+    {
+        if (_life_cpt == 0)
+        {
+            _life--;
+            _life_cpt = max_dT;
+        }
+        if (_life_cpt != 0)
+            _life_cpt--;
     }
 }
 
