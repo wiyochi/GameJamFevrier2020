@@ -13,6 +13,7 @@ public:
     Path(Entity* entity);
     ~Path();
 
+    float getMaxX() const;
     void addPosition(sf::Vector2f const & pos);
     void update();
 

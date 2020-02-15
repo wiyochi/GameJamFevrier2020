@@ -10,6 +10,17 @@ Path::~Path()
 {
 }
 
+float Path::getMaxX() const
+{
+    float max = std::numeric_limits<float>::min();
+    for (auto &&pos : _positions)
+    {
+        if (pos.x > max)
+            max = pos.x;
+    }
+    return max;
+}
+
 void Path::addPosition(sf::Vector2f const & pos)
 {
     _positions.push_back(pos);
