@@ -7,6 +7,7 @@
 #include "entities/Player.hpp"
 #include "entities/Enemy.hpp"
 #include "../graphics/TextureManager.hpp"
+#include "Builder.hpp"
 
 class World : public sf::Drawable
 {

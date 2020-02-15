@@ -2,9 +2,9 @@
 
 World::World() : _background(sf::Vector2f(1920*2, 1080))
 {
-    auto pe = new Enemy(sf::Vector2f(50, 50));
+    auto pe = Builder::createEnemy(Builder::KAMIKAZE, sf::Vector2f(400, 200));
     _enemis.push_back(pe);
-    pe->setPosition(300, 100);
+    pe->setPosition(4000, 200);
     TextureManager::getInstance().getTexture("background")->setRepeated(true);
     _background.setTextureRect(sf::IntRect(0, 0, 1920*2, 1080));
     _background.setTexture(TextureManager::getInstance().getTexture("background"));

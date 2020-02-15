@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 #include "Entity.hpp"
 #include "../../graphics/TextureManager.hpp"
@@ -14,8 +15,9 @@ private:
     int _shots_cpt;
     Path* _path;
 public:
-    Enemy(sf::Vector2f const &);
+    Enemy(sf::Vector2f const &, std::string const &);
     ~Enemy();
     void update() override;
     void draw(sf::RenderTarget &, sf::RenderStates) const override;
+    void setPath(Path * p) {_path = p;}
 };

@@ -1,14 +1,9 @@
 #include "Enemy.hpp"
 
-Enemy::Enemy(sf::Vector2f const & size) : Entity(size), _shots_cpt(0)
+Enemy::Enemy(sf::Vector2f const & size, std::string const & texture_path) : Entity(size), _shots_cpt(0)
 {
-    _sprite.setTexture(TextureManager::getInstance().getTexture("enemies/1/1"));
-    _path = new Path(this);
-
-    _path->addPosition(sf::Vector3f(50, 50, 5));
-    _path->addPosition(sf::Vector3f(0, 400, 5));
-    _path->addPosition(sf::Vector3f(-200, -50, 1));
-    _path->addPosition(sf::Vector3f(150, -400, 5));
+    _sprite.setTexture(TextureManager::getInstance().getTexture(texture_path));
+    _sprite.scale(sf::Vector2f(-1, 1));
 }
 
 Enemy::~Enemy()
