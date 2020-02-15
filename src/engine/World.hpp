@@ -1,8 +1,8 @@
 #pragma once
 
 #include "SFML/Graphics.hpp"
-#include "Entity.hpp"
-#include "Player.hpp"
+#include "entities/Entity.hpp"
+#include "entities/Player.hpp"
 
 
 class World : public sf::Drawable

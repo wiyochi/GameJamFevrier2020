@@ -14,4 +14,6 @@ public:
 
     void move(sf::Vector2f const &);
     void move(float x, float y);
+
+    bool colide(Entity *) const;
 };
