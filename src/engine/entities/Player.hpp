@@ -7,6 +7,7 @@
 
 #include "Shot.hpp"
 #include "Entity.hpp"
+#include "../../graphics/TextureManager.hpp"
 
 
 class Player : public Entity
