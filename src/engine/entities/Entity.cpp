@@ -33,7 +33,7 @@ void Entity::move(float x, float y)
     _sprite.move(x, y);
 }
 
-bool Entity::colide(Entity * e) const
+bool Entity::collide(Entity * e) const
 {
     return _sprite.getGlobalBounds().intersects(e->_sprite.getGlobalBounds());
 }

@@ -17,5 +17,5 @@ public:
     void setPosition(float x, float y) {_sprite.setPosition(x, y);};
     sf::Vector2f getPosition() const { return _sprite.getPosition(); }
 
-    bool colide(Entity *) const;
+    bool collide(Entity *) const;
 };
