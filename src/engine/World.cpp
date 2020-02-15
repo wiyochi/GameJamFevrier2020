@@ -22,5 +22,4 @@ void World::update()
             _player.decreaseLife();
         }
     }
-    std::cout << _player.getLife() << std::endl;
 }

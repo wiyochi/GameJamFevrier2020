@@ -40,7 +40,7 @@ $(EXEC): $(OBJ)
 	$(MSG) "==== édition de liens ===== "
 	$(CC) $(LFLAGS) $(OBJ) -o $(EXEC) $(LIBDIR) $(LIBFLAGS)
 	$(MSG_BUILDOK)
-	$(EXEC)
+	#$(EXEC)
 
 $(DEPFILE): $(SRC) $(SRC_H)
 	$(MSG) "Calcul des dependances..."
