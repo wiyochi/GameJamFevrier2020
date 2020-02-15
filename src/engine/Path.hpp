@@ -14,16 +14,15 @@ public:
     ~Path();
 
     float getMaxX() const;
-    void addPosition(sf::Vector2f const & pos);
+    void addPosition(sf::Vector3f const & pos);
     void update();
 
 private:
-    static constexpr float speed = 5.f;
     static constexpr float eps_x = 5.f;
     static constexpr float eps_y = 5.f;
 
-    std::vector<sf::Vector2f> _positions;
-    sf::Vector2f _objective;
+    std::vector<sf::Vector3f> _positions;
+    sf::Vector3f _objective;
     Entity * _entity;
     unsigned _positionIndex;
     sf::Vector2f _movement;

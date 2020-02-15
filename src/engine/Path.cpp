@@ -21,14 +21,14 @@ float Path::getMaxX() const
     return max;
 }
 
-void Path::addPosition(sf::Vector2f const & pos)
+void Path::addPosition(sf::Vector3f const & pos)
 {
     _positions.push_back(pos);
     _objective = _positions[0];
 
     float angle = std::atan(_positions[_positionIndex].y / _positions[_positionIndex].x);
-    _movement.x = std::abs(std::cos(angle) * speed) * ((_objective.x < 0) ? -1.f : 1.f);
-    _movement.y = std::abs(std::sin(angle) * speed) * ((_objective.y < 0) ? -1.f : 1.f);
+    _movement.x = std::abs(std::cos(angle) * _objective.z) * ((_objective.x < 0) ? -1.f : 1.f);
+    _movement.y = std::abs(std::sin(angle) * _objective.z) * ((_objective.y < 0) ? -1.f : 1.f);
 }
 
 void Path::update()
@@ -50,7 +50,7 @@ void Path::update()
         _objective = _positions[_positionIndex];
 
         float angle = std::atan(_positions[_positionIndex].y / _positions[_positionIndex].x);
-        _movement.x = std::abs(std::cos(angle) * speed) * ((_objective.x < 0) ? -1.f : 1.f);
-        _movement.y = std::abs(std::sin(angle) * speed) * ((_objective.y < 0) ? -1.f : 1.f);
+        _movement.x = std::abs(std::cos(angle) * _objective.z) * ((_objective.x < 0) ? -1.f : 1.f);
+        _movement.y = std::abs(std::sin(angle) * _objective.z) * ((_objective.y < 0) ? -1.f : 1.f);
     }
 }
