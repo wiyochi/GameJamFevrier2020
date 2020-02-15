@@ -18,10 +18,12 @@ public:
     ~TextureManager();
 
     sf::Texture* getTexture(std::string const & textureName);
+    void removeTexture(std::string const & textureName);
     void deleteTexture(std::string const & textureName);
     void deleteAllTextures();
 
     sf::Font* getFont(std::string const & fontName);
+    void removeFont(std::string const & fontName);
     void deleteFont(std::string const & fontName);
     void deleteAllFonts();
 

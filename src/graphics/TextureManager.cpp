@@ -31,7 +31,7 @@ std::string TextureManager::getTexturePath(std::string const & textureName)
 
 std::string TextureManager::getFontPath(std::string const & fontName)
 {
-    return "resources/fonts/" + fontName + ".png";
+    return "resources/fonts/" + fontName + ".ttf";
 }
 
 sf::Texture* TextureManager::getTexture(std::string const & textureName)
@@ -53,7 +53,7 @@ sf::Texture* TextureManager::getTexture(std::string const & textureName)
     return _textures[textureName]._texture;
 }
 
-void TextureManager::deleteTexture(std::string const & textureName)
+void TextureManager::removeTexture(std::string const & textureName)
 {
     auto it = _textures.find(textureName);
     if (it != _textures.end())
@@ -63,6 +63,16 @@ void TextureManager::deleteTexture(std::string const & textureName)
             delete it->second._texture;
             _textures.erase(it);
         }
+    }
+}
+
+void TextureManager::deleteTexture(std::string const & textureName)
+{
+    auto it = _textures.find(textureName);
+    if (it != _textures.end())
+    {
+        delete it->second._texture;
+        _textures.erase(it);
     }
 }
 
@@ -94,7 +104,7 @@ sf::Font* TextureManager::getFont(std::string const & fontName)
     return _fonts[fontName]._font;
 }
 
-void TextureManager::deleteFont(std::string const & fontName)
+void TextureManager::removeFont(std::string const & fontName)
 {
     auto it = _fonts.find(fontName);
     if (it == _fonts.end())
@@ -104,6 +114,16 @@ void TextureManager::deleteFont(std::string const & fontName)
             delete it->second._font;
             _fonts.erase(it);
         }
+    }
+}
+
+void TextureManager::deleteFont(std::string const & fontName)
+{
+    auto it = _fonts.find(fontName);
+    if (it != _fonts.end())
+    {
+        delete it->second._font;
+        _fonts.erase(it);
     }
 }
 
