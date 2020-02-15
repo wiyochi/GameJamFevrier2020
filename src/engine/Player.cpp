@@ -92,7 +92,7 @@ void Player::shot()
     constexpr int max_dT = 10;
     if (_shots_cpt == 0)
     {
-        _shots.push_back(new Shot());
+        _shots.push_back(new Shot(_sprite.getPosition()));
         _shots_cpt = max_dT;
     }
 }

@@ -19,8 +19,6 @@ int main()
 
         w.update();
 
-
-
         window.clear();
         window.draw(w);
         window.display();

@@ -1,8 +1,8 @@
 #include "Shot.hpp"
 
-Shot::Shot()
-{
-    _sprite.setSize(sf::Vector2f(20, 20));
+Shot::Shot(sf::Vector2f const & pos) : Entity(sf::Vector2f(20, 20))
+{  
+    _sprite.setPosition(pos);
 }
 
 void Shot::update()

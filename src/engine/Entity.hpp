@@ -8,6 +8,7 @@ protected:
     sf::RectangleShape _sprite;
 public:
     Entity();
+    Entity(sf::Vector2f const &);
     virtual void update();
     void draw(sf::RenderTarget &, sf::RenderStates) const override;
 
