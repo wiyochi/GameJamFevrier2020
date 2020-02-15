@@ -1,10 +1,20 @@
+#include <vector>
 #include <SFML/Graphics.hpp>
+#include "graphics/TextureManager.hpp"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!");
+
+    TextureManager tm = TextureManager::getInstance();
+    std::vector<sf::Sprite*> sprites;
+    sprites.push_back(new sf::Sprite(*tm.getTexture("tests/1")));
+    sprites.push_back(new sf::Sprite(*tm.getTexture("tests/1")));
+    sprites.push_back(new sf::Sprite(*tm.getTexture("tests/1")));
+
+    tm.deleteTexture("tests/1");
+    tm.deleteTexture("tests/1");
+    tm.deleteTexture("tests/1");
 
     while (window.isOpen())
     {
@@ -16,7 +26,10 @@ int main()
         }
 
         window.clear();
-        window.draw(shape);
+        for (auto &&sprite : sprites)
+        {
+            window.draw(*sprite);
+        }
         window.display();
     }
 
