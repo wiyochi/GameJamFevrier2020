@@ -21,7 +21,7 @@ private:
     static bool enter_pressed;
 
     std::vector<Button*> _buttons;
-    int _selection;
+    unsigned int _selection;
     sf::Vector2f _pos;
     sf::Vector2f _size;
 

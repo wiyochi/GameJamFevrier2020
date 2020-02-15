@@ -85,6 +85,7 @@ void Menu::addOption(std::string const & name, std::function<void()> func)
 {
     _selection = 0;
     _buttons.push_back(new Button(sf::Vector2f(_pos.x, _pos.y + (_size.y + 20) * _buttons.size()), _size, name, func));
+    _buttons[0]->select();
 }
 
 void Menu::draw(sf::RenderTarget& target, sf::RenderStates states) const
