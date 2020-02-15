@@ -1,14 +1,18 @@
 #include "World.hpp"
 
-World::World()
+World::World() : _background(sf::Vector2f(19200, 1080))
 {
     auto pe = new Enemy(sf::Vector2f(10, 10));
     _enemis.push_back(pe);
     pe->setPosition(300, 100);
+    TextureManager::getInstance().getTexture("background")->setRepeated(true);
+    _background.setTextureRect(sf::IntRect(0, 0, 19200, 1080));
+    _background.setTexture(TextureManager::getInstance().getTexture("background"));
 }
 
 void World::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
+    target.draw(_background);
     target.draw(_player);
 
     for (auto && pe : _enemis) target.draw(*pe);
@@ -16,6 +20,7 @@ void World::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 void World::update()
 {
+    _background.move(-5, 0);
     _player.update();
     for (auto && pe : _enemis)
     {
