@@ -46,7 +46,7 @@ void keskecestcommetouche()
 {
     if (sf::Joystick::isConnected(0))
     {
-        for (int i = 0; i < sf::Joystick::getButtonCount(0); i++)
+        for (unsigned i = 0; i < sf::Joystick::getButtonCount(0); i++)
         {
             if (sf::Joystick::isButtonPressed(0, i))
             {
