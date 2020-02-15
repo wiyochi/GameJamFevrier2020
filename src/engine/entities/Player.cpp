@@ -117,8 +117,6 @@ void Player::decreaseLife()
             _life--;
             _life_cpt = max_dT;
         }
-        if (_life_cpt != 0)
-            _life_cpt--;
     }
 }
 
@@ -130,6 +128,10 @@ void Player::update()
 
     for (auto && s : _shots)
         s->update();
+
+    
+    if (_life_cpt != 0)
+        _life_cpt--;
 }   
 
 void Player::draw(sf::RenderTarget & target, sf::RenderStates states) const

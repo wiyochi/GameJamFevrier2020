@@ -14,6 +14,7 @@ public:
 
     void move(sf::Vector2f const &);
     void move(float x, float y);
+    void setPosition(float x, float y) {_sprite.setPosition(x, y);};
 
     bool colide(Entity *) const;
 };
