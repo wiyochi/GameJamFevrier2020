@@ -10,7 +10,7 @@ void keskecestcommetouche();
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!", sf::Style::Fullscreen);
+    sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!"/*, sf::Style::Fullscreen*/);
     window.setFramerateLimit(120);
     World w;
 
