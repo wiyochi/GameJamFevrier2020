@@ -14,6 +14,10 @@
 class World : public sf::Drawable
 {
 private:
+    static std::mt19937 gen;
+    static std::normal_distribution<> dist_time;
+    static std::uniform_int_distribution<> dist_spawn;
+
     Player _player;
     std::vector<Enemy*> _enemis;
     std::vector<Item*> _items;
@@ -21,8 +25,11 @@ private:
     int _old_life;
     std::vector<sf::RectangleShape> _life_bar;
     sf::Text _player_life;
-    int _frameCounter;
+    int _frameCounterPattern;
     int _framePattern;
+
+    int _frameCounterItem;
+    int _frameItem;
 public:
     World();
     void draw(sf::RenderTarget &, sf::RenderStates) const override;

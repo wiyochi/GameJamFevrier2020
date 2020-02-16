@@ -1,8 +1,14 @@
 #include "World.hpp"
 
+std::mt19937 World::gen(568);
+std::normal_distribution<> World::dist_time(1600, 200);
+std::uniform_int_distribution<> World::dist_spawn(200, 800);
+
 World::World() : _background(sf::Vector2f(1920*2, 1080)), _old_life(Player::max_life),
-    _frameCounter(0),
-    _framePattern(240)
+    _frameCounterPattern(0),
+    _framePattern(240),
+    _frameCounterItem(0),
+    _frameItem(400)
 {
     TextureManager::getInstance().getTexture("hearth_b");
     for (int i = 0; i < 5; ++i)
@@ -13,9 +19,6 @@ World::World() : _background(sf::Vector2f(1920*2, 1080)), _old_life(Player::max_
         b.setPosition(i * 50, 0);
         _life_bar.push_back(b);
     }
-    _items.push_back(new Item(Item::MORE_FIRE, sf::Vector2f(1000, 400)));
-    _items.push_back(new Item(Item::MORE_FIRE, sf::Vector2f(2000, 400)));
-    _items.push_back(new Item(Item::MORE_FIRE, sf::Vector2f(3000, 400)));
 
     TextureManager::getInstance().getTexture("background")->setRepeated(true);
     _background.setTextureRect(sf::IntRect(0, 0, 1920*2, 1080));
@@ -38,7 +41,8 @@ void World::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 void World::update()
 {
-    _frameCounter++;
+    _frameCounterPattern++;
+    _frameCounterItem++;
 
     for (auto&& i : _items)
     {
@@ -52,10 +56,17 @@ void World::update()
 
     _items.erase(std::remove_if(_items.begin(), _items.end(), [](auto i){return i->isDead();}), _items.end());
 
-    if (_frameCounter > _framePattern)
+    if (_frameCounterPattern > _framePattern)
     {
         _framePattern = Pattern::getRandomPattern(_enemis);
-        _frameCounter = 0;
+        _frameCounterPattern = 0;
+    }
+
+    if (_frameCounterItem > _frameItem)
+    {
+        _items.push_back(new Item(Item::MORE_FIRE, sf::Vector2f(2000, dist_spawn(gen))));
+        _frameItem = dist_time(gen);
+        _frameCounterItem = 0;
     }
 
     _background.move(-5, 0);
