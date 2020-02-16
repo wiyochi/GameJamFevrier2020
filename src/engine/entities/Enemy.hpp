@@ -8,6 +8,7 @@
 #include "../../graphics/TextureManager.hpp"
 #include "Shot.hpp"
 #include "../Path.hpp"
+#include "../Animated.hpp"
 
 class Enemy : public Entity
 {
@@ -18,6 +19,7 @@ private:
     Path* _path;
     std::vector<sf::Vector3f> _model;
     bool _isAlive;
+    Animated* _animation;
 public:
     Enemy(sf::Vector2f const &, std::string const &, int = 120);
     ~Enemy();

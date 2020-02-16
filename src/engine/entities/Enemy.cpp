@@ -2,7 +2,8 @@
 
 Enemy::Enemy(sf::Vector2f const & size, std::string const & texture_path, int fire_speed) : Entity(size), _shots_cpt(0), _fire_speed(fire_speed), _isAlive(true)
 {
-    _sprite.setTexture(TextureManager::getInstance().getTexture(texture_path));
+    //_sprite.setTexture(TextureManager::getInstance().getTexture(texture_path));
+    _animation = new Animated(_sprite, texture_path, 12);
     _sprite.scale(sf::Vector2f(-1, 1));
 }
 
@@ -14,10 +15,12 @@ Enemy::~Enemy()
         delete s;
     }
     
+    delete _animation;
 }
 
 void Enemy::update()
 {
+    _animation->update();
     _shots.erase(std::remove_if(_shots.begin(), _shots.end(), [](auto s){
         if (s->getPosition().x < -100)
         {
