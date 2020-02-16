@@ -31,6 +31,7 @@ private:
     void move_inputs();
     void shot_inputs();
     void delete_shots();
+    int _nb_shots;
 public:
     static constexpr int max_life = 5;
     Player();
@@ -44,4 +45,6 @@ public:
     void move(sf::Vector2f const &) override;
     int getLife() {return _life;}
     std::vector<Shot *> & getShots() {return _shots;}
+    void increaseStats(int stats);
+    int getNb() const {return _nb_shots;}
 };

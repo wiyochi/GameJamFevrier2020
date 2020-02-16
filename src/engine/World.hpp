@@ -8,6 +8,7 @@
 #include "entities/Enemy.hpp"
 #include "../graphics/TextureManager.hpp"
 #include "Builder.hpp"
+#include "entities/Item.hpp"
 #include "Pattern.hpp"
 
 class World : public sf::Drawable
@@ -15,6 +16,7 @@ class World : public sf::Drawable
 private:
     Player _player;
     std::vector<Enemy*> _enemis;
+    std::vector<Item*> _items;
     sf::RectangleShape _background;
     int _old_life;
     std::vector<sf::RectangleShape> _life_bar;

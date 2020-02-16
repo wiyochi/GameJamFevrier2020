@@ -13,37 +13,10 @@ World::World() : _background(sf::Vector2f(1920*2, 1080)), _old_life(Player::max_
         b.setPosition(i * 50, 0);
         _life_bar.push_back(b);
     }
-/*
-    auto pe = Builder::createEnemy(Builder::KAMIKAZE, sf::Vector2f(400, 200));
-    _enemis.push_back(pe);
-    pe->setPosition(4000, 200);
-    auto p2 = Builder::createEnemy(Builder::RX, sf::Vector2f(400, 200));
-    _enemis.push_back(p2);
-    p2->setPosition(2000, 1200);
+    _items.push_back(Item::createItem(Item::MORE_FIRE, sf::Vector2f(1000, 400)));
+    _items.push_back(Item::createItem(Item::MORE_FIRE, sf::Vector2f(2000, 400)));
+    _items.push_back(Item::createItem(Item::MORE_FIRE, sf::Vector2f(3000, 400)));
 
-    for (int i = 0; i < 10; ++i)
-    {
-        auto p3 = Builder::createEnemy(Builder::NX, sf::Vector2f(400, 200));
-        _enemis.push_back(p3);
-        p3->setPosition(2000, 200 + i * 40);
-    }
-
-    auto p4 = Builder::createEnemy(Builder::WM, sf::Vector2f(400, 200));
-    _enemis.push_back(p4);
-    p4->setPosition(1800, 200);
-
-    auto p5 = Builder::createEnemy(Builder::MW, sf::Vector2f(400, 200));
-    _enemis.push_back(p5);
-    p5->setPosition(1800, 200);
-
-    auto p6 = Builder::createEnemy(Builder::I, sf::Vector2f(400, 200));
-    _enemis.push_back(p6);
-    p6->setPosition(1800, 0);
-
-    auto p7 = Builder::createEnemy(Builder::O, sf::Vector2f(400, 200));
-    _enemis.push_back(p7);
-    p7->setPosition(1600, 500);
-*/
     TextureManager::getInstance().getTexture("background")->setRepeated(true);
     _background.setTextureRect(sf::IntRect(0, 0, 1920*2, 1080));
     _background.setTexture(TextureManager::getInstance().getTexture("background"));
@@ -58,11 +31,26 @@ void World::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
     for (auto&& b : _life_bar)
         target.draw(b);
+
+    for (auto&& i : _items)
+        target.draw(*i);
 }
 
 void World::update()
 {
     _frameCounter++;
+
+    for (auto&& i : _items)
+    {
+        i->update();
+        if (_player.collide(i) && !i->isDead())
+        {
+            _player.increaseStats(0);
+            i->use();
+        }
+    }
+
+    _items.erase(std::remove_if(_items.begin(), _items.end(), [](auto i){return i->isDead();}), _items.end());
 
     if (_frameCounter > _framePattern)
     {

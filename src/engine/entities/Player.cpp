@@ -2,7 +2,7 @@
 
 float Player::diag_speed = max_speed * max_speed / sqrt(max_speed * max_speed + max_speed * max_speed);
 
-Player::Player() : Entity(sf::Vector2f(200, 200)), _shots_cpt(0), _life_cpt(0), _life(max_life)
+Player::Player() : Entity(sf::Vector2f(200, 200)), _shots_cpt(0), _life_cpt(0), _life(max_life), _nb_shots(1)
 {
     //_sprite.setTexture(TextureManager::getInstance().getTexture("player/1"));
     _animation = new Animated(_sprite, "player", 12);
@@ -133,9 +133,15 @@ void Player::shot()
     constexpr int max_dT = 10;
     if (_shots_cpt == 0)
     {
+        constexpr float height_fire = 40;
         auto pos = _sprite.getPosition();
-        pos.x += _sprite.getSize().x / 2 + 5;
-        _shots.push_back(new Shot(pos, "shots/Bullet-2"));
+        pos.x += _sprite.getSize().x / 2;
+        pos.y -= height_fire * (_nb_shots - 1) / 2;
+        for (int i = 0; i < _nb_shots; ++i)
+        {
+            _shots.push_back(new Shot(pos, "shots/Bullet-2"));
+            pos.y += height_fire;
+        }
         _shots_cpt = max_dT;
     }
 }
@@ -176,4 +182,14 @@ void Player::draw(sf::RenderTarget & target, sf::RenderStates states) const
     Entity::draw(target, states);
     for (auto&& s : _shots)
         target.draw(*s);
+}
+
+void Player::increaseStats(int stats)
+{
+    switch(stats)
+    {
+        case 0:
+            _nb_shots++;
+            break;
+    }
 }
