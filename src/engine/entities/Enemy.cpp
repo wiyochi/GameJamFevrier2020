@@ -1,6 +1,12 @@
 #include "Enemy.hpp"
 
-Enemy::Enemy(sf::Vector2f const & size, std::string const & texture_path, int fire_speed) : Entity(size), _shots_cpt(0), _fire_speed(fire_speed), _isAlive(true)
+Enemy::Enemy(sf::Vector2f const & size, std::string const & texture_path, int fire_speed) :
+    Entity(size),
+    _shots_cpt(0),
+    _fire_speed(fire_speed),
+    _isAlive(true),
+    _lifeCounter(0),
+    _life(2)
 {
     //_sprite.setTexture(TextureManager::getInstance().getTexture(texture_path));
     _animation = new Animated(_sprite, texture_path, 12);
@@ -49,6 +55,13 @@ void Enemy::update()
     }
     for(auto && ps : _shots)
         ps->update();
+
+    if (_lifeCounter != 0)
+    {
+        _lifeCounter--;
+        
+        _sprite.setFillColor(sf::Color(255, 255 - (int) (255.0 * _lifeCounter / max_dt), 255 - (int) (255.0 * (_lifeCounter) / max_dt)));
+    }
 }
 
 void Enemy::draw(sf::RenderTarget & target, sf::RenderStates states) const 
@@ -79,4 +92,20 @@ void Enemy::setShotPathModel(int nb, ...)
         _model.push_back(sf::Vector3f(-2000, 0, 10));
     }
     
+}
+
+void Enemy::hurt()
+{
+    if (_life > 0) 
+    {
+        if (_lifeCounter == 0)
+        {
+            _life--;
+            _lifeCounter = max_dt;
+        }
+    }
+    else
+    {
+        kill();
+    }
 }

@@ -72,7 +72,7 @@ void World::update()
         {
             if (s->collide(pe))
             {
-                pe->kill();
+                pe->hurt();
             }
         }
     }
