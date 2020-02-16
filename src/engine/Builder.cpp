@@ -7,22 +7,63 @@ Enemy * Builder::createEnemy(TYPE type, sf::Vector2f const & pos, short path_sta
     switch (type)
     {
     case KAMIKAZE:
-        pe = new Enemy(sf::Vector2f(100, 100), "enemies/2/1");
-
+        pe = new Enemy(sf::Vector2f(100, 100), "enemies/1/1");
         path = new Path(pe);
-
         path->addPosition(sf::Vector3f(-2000, 0, 5));
+        pe->setShotPathModel();
         break;
-    case XX:
+    case NX:
+        pe = new Enemy(sf::Vector2f(100, 100), "enemies/2/1");
+        path = new Path(pe);
+        path->addPosition(sf::Vector3f(-1400, 1100, 5));
+        pe->setShotPathModel();
+        break;
+    case RX:
+        pe = new Enemy(sf::Vector2f(100, 100), "enemies/2/1");
+        path = new Path(pe);
+        path->addPosition(sf::Vector3f(-1400, -1100, 5));
+        pe->setShotPathModel();
         break;
     case WM:
+        pe = new Enemy(sf::Vector2f(100, 100), "enemies/3/1", 1);
+        path = new Path(pe);
+        path->addPosition(sf::Vector3f(0, -200, 5));
+        path->addPosition(sf::Vector3f(0, 200, 5));
+        pe->setShotPathModel();
+        break;
+    case MW:
+        pe = new Enemy(sf::Vector2f(100, 100), "enemies/3/1", 20);
+        path = new Path(pe);
+        path->addPosition(sf::Vector3f(0, 200, 5));
+        path->addPosition(sf::Vector3f(0, -200, 5));
+        pe->setShotPathModel();
         break;
     case I:
+        pe = new Enemy(sf::Vector2f(100, 100), "enemies/4/1");
+        path = new Path(pe);
+        path->addPosition(sf::Vector3f(0, 500, 5));
+        path->addPosition(sf::Vector3f(0, 100, 1));
+        path->addPosition(sf::Vector3f(0, 480, 6));
+        path->addPosition(sf::Vector3f(0, -480, 1));
+        path->addPosition(sf::Vector3f(0, -100, 6));
+        path->addPosition(sf::Vector3f(0, -500, 5));
+        pe->setShotPathModel();
         break;
     case O:
+        pe = new Enemy(sf::Vector2f(100, 100), "enemies/5/1");
+        path = new Path(pe);
+        path->addPosition(sf::Vector3f(120, -200, 5));
+        path->addPosition(sf::Vector3f(100, 0, 5));
+        path->addPosition(sf::Vector3f(120, 200, 5));
+        path->addPosition(sf::Vector3f(0, 200, 5));
+        path->addPosition(sf::Vector3f(-120, 200, 5));
+        path->addPosition(sf::Vector3f(-200, 0, 5));
+        path->addPosition(sf::Vector3f(-120, -200, 5));
+        path->addPosition(sf::Vector3f(0, -200, 5));
+        pe->setShotPathModel();
         break;
     default:
-        pe = new Enemy(sf::Vector2f(500, 500), "enemies/1/1");
+        pe = new Enemy(sf::Vector2f(500, 500), "enemies/6/1");
 
         path = new Path(pe);
 
@@ -30,6 +71,7 @@ Enemy * Builder::createEnemy(TYPE type, sf::Vector2f const & pos, short path_sta
         path->addPosition(sf::Vector3f(0, 400, 5));
         path->addPosition(sf::Vector3f(-200, -50, 1));
         path->addPosition(sf::Vector3f(150, -400, 5));
+        pe->setShotPathModel();
 
         break;
     }

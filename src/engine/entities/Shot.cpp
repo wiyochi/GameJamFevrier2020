@@ -1,6 +1,6 @@
 #include "Shot.hpp"
 
-Shot::Shot(sf::Vector2f const & pos) : Entity(sf::Vector2f(20, 20))
+Shot::Shot(sf::Vector2f const & pos) : Entity(sf::Vector2f(50, 50)), _path(nullptr)
 {  
     _sprite.setPosition(pos);
     _sprite.setTexture(TextureManager::getInstance().getTexture("shots/Bullet-1"));
@@ -8,7 +8,10 @@ Shot::Shot(sf::Vector2f const & pos) : Entity(sf::Vector2f(20, 20))
 
 void Shot::update()
 {
-    move(speed, 0);
+    if (_path != nullptr)
+        _path->update();
+    else 
+        move(Shot::speed, 0);
 }
 
 bool Shot::isDead()

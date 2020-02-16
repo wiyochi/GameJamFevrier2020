@@ -26,7 +26,7 @@ private:
 
     int _shots_cpt; // Compte le dT entre 2 tirs
     int _life_cpt; // Compte le dT entre 2 dmg
-    int _life;
+    volatile int _life;
 
     void move_inputs();
     void shot_inputs();

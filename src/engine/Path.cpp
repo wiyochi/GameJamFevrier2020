@@ -26,13 +26,15 @@ void Path::addPosition(sf::Vector3f const & pos)
     _positions.push_back(pos);
     _objective = _positions[0];
 
-    float angle = std::atan(_positions[_positionIndex].y / _positions[_positionIndex].x);
+    float angle = std::atan2(_positions[_positionIndex].y, _positions[_positionIndex].x);
     _movement.x = std::abs(std::cos(angle) * _objective.z) * ((_objective.x < 0) ? -1.f : 1.f);
     _movement.y = std::abs(std::sin(angle) * _objective.z) * ((_objective.y < 0) ? -1.f : 1.f);
 }
 
 void Path::update()
 {
+    if (_positions.size() == 0) return; // TODO: Find the bug
+
     if (std::abs(_objective.x) >= eps_x)
     {
         _entity->move(_movement.x, 0);
