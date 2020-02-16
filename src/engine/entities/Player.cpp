@@ -123,7 +123,7 @@ void Player::shot()
     {
         auto pos = _sprite.getPosition();
         pos.x += _sprite.getSize().x / 2 + 5;
-        _shots.push_back(new Shot(pos));
+        _shots.push_back(new Shot(pos, "shots/Bullet-2"));
         _shots_cpt = max_dT;
     }
 }

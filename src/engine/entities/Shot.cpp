@@ -1,9 +1,9 @@
 #include "Shot.hpp"
 
-Shot::Shot(sf::Vector2f const & pos) : Entity(sf::Vector2f(50, 50)), _path(nullptr)
+Shot::Shot(sf::Vector2f const & pos, std::string const & texture) : Entity(sf::Vector2f(50, 30)), _path(nullptr)
 {  
     _sprite.setPosition(pos);
-    _sprite.setTexture(TextureManager::getInstance().getTexture("shots/Bullet-1"));
+    _sprite.setTexture(TextureManager::getInstance().getTexture(texture));
 }
 
 void Shot::update()

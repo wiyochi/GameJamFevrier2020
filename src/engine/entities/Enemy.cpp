@@ -61,7 +61,7 @@ void Enemy::setShotPathModel(int nb, ...)
         va_end(args);
     } else
     {
-        _model.push_back(sf::Vector3f(-2000, 0, 15));
+        _model.push_back(sf::Vector3f(-2000, 0, 10));
     }
     
 }
