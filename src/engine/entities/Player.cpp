@@ -17,7 +17,17 @@ Player::~Player()
 
 void Player::delete_shots()
 {
-   _shots.erase(std::remove_if(_shots.begin(), _shots.end(), [](Shot * s) {return s->getPosition().x > 2050;}), _shots.end());
+   _shots.erase(std::remove_if(_shots.begin(), _shots.end(), [](Shot * s) {
+       
+       
+       if(s->getPosition().x > 2050)
+       {
+           delete s;
+           return true;
+       }
+       return false;
+       
+       }), _shots.end());
 }
 
 void Player::move_inputs()
