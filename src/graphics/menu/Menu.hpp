@@ -12,7 +12,7 @@ public:
     Menu(sf::Vector2f const & pos, sf::Vector2f const & size);
     ~Menu();
 
-    void addOption(std::string const & name, std::function<void()> func);
+    void addOption(std::wstring const & name, std::function<void()> func);
     void update();
 
 private:

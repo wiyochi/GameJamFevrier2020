@@ -7,7 +7,7 @@
 class Button : public sf::Drawable
 {
 public:
-    Button(sf::Vector2f const & pos, sf::Vector2f const & size, std::string const & name, std::function<void()> func);
+    Button(sf::Vector2f const & pos, sf::Vector2f const & size, std::wstring const & name, std::function<void()> func);
     ~Button();
 
     void select();

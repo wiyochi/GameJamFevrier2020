@@ -1,7 +1,8 @@
 #include "World.hpp"
 
-World::World() : _background(sf::Vector2f(1920*2, 1080))
+World::World() : _background(sf::Vector2f(1920*2, 1080)), _old_life(Player::max_life)
 {
+    TextureManager::getInstance().getTexture("hearth_b");
     for (int i = 0; i < 5; ++i)
     {
         sf::RectangleShape b(sf::Vector2f(50, 50));

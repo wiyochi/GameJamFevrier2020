@@ -1,6 +1,6 @@
 #include "Button.hpp"
 
-Button::Button(sf::Vector2f const & pos, sf::Vector2f const & size, std::string const & name, std::function<void()> func) :
+Button::Button(sf::Vector2f const & pos, sf::Vector2f const & size, std::wstring const & name, std::function<void()> func) :
     _function(func)
 {
     _shape.setPosition(pos);

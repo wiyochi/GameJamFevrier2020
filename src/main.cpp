@@ -8,7 +8,7 @@ void keskecestcommetouche();
 
 #include "engine/World.hpp"
 
-enum STATE { MENU, GAME};
+enum STATE { MENU, GAME, PAUSE};
 
 int main()
 {
@@ -17,12 +17,15 @@ int main()
     window.setFramerateLimit(120);
     World w;
 
-    Menu m(sf::Vector2f(100, 10), sf::Vector2f(200, 40)); 
+    Menu m(sf::Vector2f(860, 350), sf::Vector2f(200, 40)); 
 
-    m.addOption("Démarrer", [&](){ state = GAME;});
-    m.addOption("rien", [](){ std::cout << "ouai Bouton 2" << std::endl; });
-    m.addOption("rien", [](){ std::cout << "3" << std::endl; });
-    m.addOption("Quitter", [](){ exit(0); });   
+    sf::RectangleShape fog(sf::Vector2f(1920, 1080));
+    fog.setFillColor(sf::Color(0, 0, 0, 125));
+
+    m.addOption(L"Démarrer", [&](){ state = GAME;});
+    m.addOption(L"rien", [](){ std::cout << "ouai Bouton 2" << std::endl; });
+    m.addOption(L"rien", [](){ std::cout << "3" << std::endl; });
+    m.addOption(L"Quitter", [](){ exit(0); });   
 
     while (window.isOpen())
     {
@@ -33,16 +36,50 @@ int main()
                 window.close();
         }
 
+
         if (state == GAME)
+        {
+            if ((sf::Joystick::isConnected(0) && sf::Joystick::isButtonPressed(0, 7)) || (!sf::Joystick::isConnected(0) && sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)))
+            {
+                state = PAUSE;
+                continue;
+            }
             w.update();
-        if (state == MENU)
+        } 
+        else if (state == MENU)
+        {
             m.update();
+        }
+        else if (state == PAUSE)
+        {
+            if ((sf::Joystick::isConnected(0) && sf::Joystick::isButtonPressed(0, 1)) || (!sf::Joystick::isConnected(0) && sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)))
+            {
+                state = GAME;
+                continue;
+            }
+            else if ((sf::Joystick::isConnected(0) && sf::Joystick::isButtonPressed(0, 2)) || (!sf::Joystick::isConnected(0) && sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)))
+            {
+                state = MENU;
+                continue;
+            }
+        }
+        
 
         window.clear();
         if (state == MENU)
+        {
             window.draw(m);
-        if (state == GAME)
+        }
+        else if (state == GAME)
+        {
             window.draw(w);
+        }
+        else if (state == PAUSE)
+        {
+            window.draw(w);
+            window.draw(fog);
+        }
+        
         window.display();
     }
 
