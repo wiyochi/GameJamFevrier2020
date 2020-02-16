@@ -1,13 +1,15 @@
 #include "World.hpp"
 
-World::World() : _background(sf::Vector2f(1920*2, 1080))
+World::World() : _background(sf::Vector2f(1920*2, 1080)),
+    _frameCounter(0),
+    _framePattern(240)
 {
     _player_life.setFont(*TextureManager::getInstance().getFont("Roboto-Thin"));
     _player_life.setStyle(sf::Text::Bold);
     _player_life.setFillColor(sf::Color::Black);
     _player_life.setCharacterSize(60);
     _player_life.setPosition(500, 500);
-
+/*
     auto pe = Builder::createEnemy(Builder::KAMIKAZE, sf::Vector2f(400, 200));
     _enemis.push_back(pe);
     pe->setPosition(4000, 200);
@@ -37,7 +39,7 @@ World::World() : _background(sf::Vector2f(1920*2, 1080))
     auto p7 = Builder::createEnemy(Builder::O, sf::Vector2f(400, 200));
     _enemis.push_back(p7);
     p7->setPosition(1600, 500);
-
+*/
     TextureManager::getInstance().getTexture("background")->setRepeated(true);
     _background.setTextureRect(sf::IntRect(0, 0, 1920*2, 1080));
     _background.setTexture(TextureManager::getInstance().getTexture("background"));
@@ -55,6 +57,14 @@ void World::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 void World::update()
 {
+    _frameCounter++;
+
+    if (_frameCounter > _framePattern)
+    {
+        _framePattern = Pattern::getRandomPattern(_enemis);
+        _frameCounter = 0;
+    }
+
     _background.move(-5, 0);
     if(_background.getPosition().x == -1920) _background.move(1920, 0);
     _player.update();

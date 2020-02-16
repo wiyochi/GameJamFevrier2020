@@ -9,7 +9,7 @@ Enemy * Builder::createEnemy(TYPE type, sf::Vector2f const & pos, short path_sta
     case KAMIKAZE:
         pe = new Enemy(sf::Vector2f(100, 100), "enemies/1/1");
         path = new Path(pe);
-        path->addPosition(sf::Vector3f(-2000, 0, 5));
+        path->addPosition(sf::Vector3f(-2000, 0, 10));
         pe->setShotPathModel();
         break;
     case NX:
