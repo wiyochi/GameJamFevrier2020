@@ -15,7 +15,8 @@ private:
     Player _player;
     std::vector<Enemy*> _enemis;
     sf::RectangleShape _background;
-    sf::Text _player_life;
+    int _old_life;
+    std::vector<sf::RectangleShape> _life_bar;
 public:
     World();
     void draw(sf::RenderTarget &, sf::RenderStates) const override;
