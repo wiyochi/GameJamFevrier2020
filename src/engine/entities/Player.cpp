@@ -11,11 +11,13 @@ Player::Player() : Entity(sf::Vector2f(200, 200)), _shots_cpt(0), _life_cpt(0), 
 Player::~Player()
 {
     delete _animation;
+    for (auto && s : _shots)
+        delete s;
 }
 
 void Player::delete_shots()
 {
-   _shots.erase(std::remove_if(_shots.begin(), _shots.end(), [](Shot * s) {return s->isDead();}), _shots.end());
+   _shots.erase(std::remove_if(_shots.begin(), _shots.end(), [](Shot * s) {return s->getPosition().x > 2050;}), _shots.end());
 }
 
 void Player::move_inputs()

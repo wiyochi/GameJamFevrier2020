@@ -25,7 +25,7 @@ int main()
     m.addOption(L"Démarrer", [&](){ state = GAME;});
     m.addOption(L"rien", [](){ std::cout << "ouai Bouton 2" << std::endl; });
     m.addOption(L"rien", [](){ std::cout << "3" << std::endl; });
-    m.addOption(L"Quitter", [](){ exit(0); });   
+    m.addOption(L"Quitter", [](){ TextureManager::getInstance().deleteAllFonts(); TextureManager::getInstance().deleteAllTextures(); exit(0); });   
 
     while (window.isOpen())
     {

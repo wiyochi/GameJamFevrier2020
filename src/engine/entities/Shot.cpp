@@ -13,8 +13,3 @@ void Shot::update()
     else 
         move(Shot::speed, 0);
 }
-
-bool Shot::isDead()
-{
-    return false;
-}

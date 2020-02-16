@@ -9,11 +9,22 @@ Enemy::Enemy(sf::Vector2f const & size, std::string const & texture_path, int fi
 Enemy::~Enemy()
 {
     delete _path;
+    for (auto &&s : _shots)
+    {
+        delete s;
+    }
+    
 }
 
 void Enemy::update()
 {
-    _shots.erase(std::remove_if(_shots.begin(), _shots.end(), [](auto s){return s->getPosition().x < -100;}), _shots.end());
+    _shots.erase(std::remove_if(_shots.begin(), _shots.end(), [](auto s){
+        if (s->getPosition().x < -100)
+        {
+            delete s;
+            return true;
+        } return false;}), 
+    _shots.end());
     if (isAlive())
     {
         _path->update();
