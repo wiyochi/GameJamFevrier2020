@@ -13,9 +13,9 @@ World::World() : _background(sf::Vector2f(1920*2, 1080)), _old_life(Player::max_
         b.setPosition(i * 50, 0);
         _life_bar.push_back(b);
     }
-    _items.push_back(Item::createItem(Item::MORE_FIRE, sf::Vector2f(1000, 400)));
-    _items.push_back(Item::createItem(Item::MORE_FIRE, sf::Vector2f(2000, 400)));
-    _items.push_back(Item::createItem(Item::MORE_FIRE, sf::Vector2f(3000, 400)));
+    _items.push_back(new Item(Item::MORE_FIRE, sf::Vector2f(1000, 400)));
+    _items.push_back(new Item(Item::MORE_FIRE, sf::Vector2f(2000, 400)));
+    _items.push_back(new Item(Item::MORE_FIRE, sf::Vector2f(3000, 400)));
 
     TextureManager::getInstance().getTexture("background")->setRepeated(true);
     _background.setTextureRect(sf::IntRect(0, 0, 1920*2, 1080));

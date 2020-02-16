@@ -1,19 +1,14 @@
 #include "Item.hpp"
 
-Item::Item(std::string const & texture, sf::Vector2f const & pos) : Entity(sf::Vector2f(50, 50)), _isDead(false)
+Item::Item(TYPE type, sf::Vector2f const & pos) : Entity(sf::Vector2f(50, 50)), _isDead(false)
 {
-    _sprite.setTexture(TextureManager::getInstance().getTexture(texture));
-    setPosition(pos.x, pos.y);
-}
-
-Item * Item::createItem(TYPE t, sf::Vector2f const & pos)
-{
-    switch (t)
+    switch (type)
     {
-    case MORE_FIRE:
-        return new Item("element_01", pos);
-        break;
+        case MORE_FIRE:
+            _sprite.setTexture(TextureManager::getInstance().getTexture("element_01"));
+            break;
     }
+    setPosition(pos.x, pos.y);
 }
 
 void Item::update()
