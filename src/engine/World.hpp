@@ -8,6 +8,7 @@
 #include "entities/Enemy.hpp"
 #include "../graphics/TextureManager.hpp"
 #include "Builder.hpp"
+#include "Pattern.hpp"
 
 class World : public sf::Drawable
 {
@@ -17,6 +18,9 @@ private:
     sf::RectangleShape _background;
     int _old_life;
     std::vector<sf::RectangleShape> _life_bar;
+    sf::Text _player_life;
+    int _frameCounter;
+    int _framePattern;
 public:
     World();
     void draw(sf::RenderTarget &, sf::RenderStates) const override;
