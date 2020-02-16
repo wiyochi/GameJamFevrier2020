@@ -65,6 +65,20 @@ void World::update()
     {
         _life_bar[_player.getLife()].setTexture(TextureManager::getInstance().getTexture("hearth_b"));
     }
+
+    for (auto&& s : _player.getShots())
+    {
+        for (auto && pe : _enemis)
+        {
+            if (s->collide(pe))
+            {
+                pe->kill();
+            }
+        }
+    }
+
+    _enemis.erase(std::remove_if(_enemis.begin(), _enemis.end(), [](auto e){return e->isDeletable();}), _enemis.end());
+
     for (auto && pe : _enemis)
     {
         pe->update();

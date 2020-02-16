@@ -17,6 +17,7 @@ private:
     int _fire_speed;
     Path* _path;
     std::vector<sf::Vector3f> _model;
+    bool _isAlive;
 public:
     Enemy(sf::Vector2f const &, std::string const &, int = 120);
     ~Enemy();
@@ -25,5 +26,8 @@ public:
     void setPath(Path * p) {_path = p;}
     void setShotPathModel(int i = 0, ...);
     std::vector<Shot *> getShots() {return _shots;}
+    void kill() {_isAlive = false;}
+    bool isAlive() const {return _isAlive;}
+    bool isDeletable() const {return !_isAlive && _shots.empty();}
 
 };

@@ -1,6 +1,6 @@
 #include "Enemy.hpp"
 
-Enemy::Enemy(sf::Vector2f const & size, std::string const & texture_path, int fire_speed) : Entity(size), _shots_cpt(0), _fire_speed(fire_speed)
+Enemy::Enemy(sf::Vector2f const & size, std::string const & texture_path, int fire_speed) : Entity(size), _shots_cpt(0), _fire_speed(fire_speed), _isAlive(true)
 {
     _sprite.setTexture(TextureManager::getInstance().getTexture(texture_path));
     _sprite.scale(sf::Vector2f(-1, 1));
@@ -13,33 +13,34 @@ Enemy::~Enemy()
 
 void Enemy::update()
 {
-    _path->update();
-
-
-    if (_shots_cpt == 0)
+    _shots.erase(std::remove_if(_shots.begin(), _shots.end(), [](auto s){return s->getPosition().x < -100;}), _shots.end());
+    if (isAlive())
     {
-        Shot * s = new Shot(_sprite.getPosition());
-        Path * p = new Path(s);
-
-        for (auto && v : _model)
+        _path->update();
+        if (_shots_cpt == 0)
         {
-            p->addPosition(v);
+            Shot * s = new Shot(_sprite.getPosition());
+            Path * p = new Path(s);
+
+            for (auto && v : _model)
+            {
+                p->addPosition(v);
+            }
+
+            s->setPath(p);
+            _shots.push_back(s);
+            _shots_cpt = _fire_speed;
         }
-
-        s->setPath(p);
-        _shots.push_back(s);
-        _shots_cpt = _fire_speed;
+        _shots_cpt--;
     }
-    _shots_cpt--;
-
-
     for(auto && ps : _shots)
         ps->update();
 }
 
 void Enemy::draw(sf::RenderTarget & target, sf::RenderStates states) const 
 {
-    Entity::draw(target, states);
+    if(isAlive())
+        Entity::draw(target, states);
 
     for(auto && ps : _shots)
         target.draw(*ps);
