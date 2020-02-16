@@ -130,7 +130,6 @@ void Player::shot()
 
 void Player::decreaseLife()
 {  
-    constexpr int max_dT = 60;
     if (_life > 0) 
     {
         if (_life_cpt == 0)
@@ -153,7 +152,11 @@ void Player::update()
 
     
     if (_life_cpt != 0)
+    {
         _life_cpt--;
+        
+        _sprite.setFillColor(sf::Color(255, 255 - (int) (255.0 * _life_cpt / max_dT), 255 - (int) (255.0 * (_life_cpt) / max_dT)));
+    }
 }   
 
 void Player::draw(sf::RenderTarget & target, sf::RenderStates states) const

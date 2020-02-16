@@ -14,6 +14,7 @@
 class Player : public Entity
 {
 private:
+    static constexpr int max_dT = 120 * 2;
     static constexpr int max_life = 5;
     static constexpr float max_speed = 7.5f;
     static float diag_speed;
