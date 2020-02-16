@@ -2,7 +2,7 @@
 
 float Player::diag_speed = max_speed * max_speed / sqrt(max_speed * max_speed + max_speed * max_speed);
 
-Player::Player() : Entity(sf::Vector2f(200, 200)), _shots_cpt(0), _life_cpt(0), _life(max_life), _nb_shots(1)
+Player::Player() : Entity(sf::Vector2f(200, 200)), _shots_cpt(0), _life_cpt(0), _life(max_life), _nb_shots(1), _angle_shots(0)
 {
     //_sprite.setTexture(TextureManager::getInstance().getTexture("player/1"));
     _animation = new Animated(_sprite, "player", 12);
@@ -142,6 +142,31 @@ void Player::shot()
             _shots.push_back(new Shot(pos, "shots/Bullet-2"));
             pos.y += height_fire;
         }
+ 
+        auto pos1 = _sprite.getPosition();
+        auto pos2 = _sprite.getPosition();
+        pos1.y += _sprite.getSize().y / 2;
+        pos2.y -= _sprite.getSize().y / 2;
+        for (int i = 0; i < _angle_shots; ++i)
+        {
+            Shot* up = new Shot(pos1, "shots/Bullet-2");
+            Path * upp = new Path(up);
+            upp->addPosition(sf::Vector3f(2000, 500, 15));
+            up->setPath(upp);
+ 
+ 
+            Shot* down = new Shot(pos2, "shots/Bullet-2");
+            Path * downp = new Path(down);
+            downp->addPosition(sf::Vector3f(2000, -500, 15));
+            down->setPath(downp);
+ 
+            _shots.push_back(up);
+            _shots.push_back(down);
+            pos1.x -= height_fire;
+            pos1.y -= height_fire;
+            pos2.x -= height_fire;
+            pos2.y += height_fire;
+        }
         _shots_cpt = max_dT;
     }
 }
@@ -190,6 +215,9 @@ void Player::increaseStats(int stats)
     {
         case 0:
             _nb_shots++;
+            break;
+        case 1:
+            _angle_shots++;
             break;
     }
 }

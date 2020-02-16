@@ -32,6 +32,7 @@ private:
     void shot_inputs();
     void delete_shots();
     int _nb_shots;
+    int _angle_shots;
 public:
     static constexpr int max_life = 5;
     Player();

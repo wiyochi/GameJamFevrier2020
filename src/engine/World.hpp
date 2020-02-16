@@ -17,6 +17,7 @@ private:
     static std::mt19937 gen;
     static std::normal_distribution<> dist_time;
     static std::uniform_int_distribution<> dist_spawn;
+    static std::uniform_int_distribution<> dist_type;
 
     Player _player;
     std::vector<Enemy*> _enemis;

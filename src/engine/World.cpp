@@ -1,8 +1,9 @@
 #include "World.hpp"
 
-std::mt19937 World::gen(568);
+std::mt19937 World::gen(457);
 std::normal_distribution<> World::dist_time(1600, 200);
 std::uniform_int_distribution<> World::dist_spawn(200, 800);
+std::uniform_int_distribution<> World::dist_type(0, 1);
 
 World::World() : _background(sf::Vector2f(1920*2, 1080)), _old_life(Player::max_life),
     _frameCounterPattern(0),
@@ -49,7 +50,7 @@ void World::update()
         i->update();
         if (_player.collide(i) && !i->isDead())
         {
-            _player.increaseStats(0);
+            _player.increaseStats(i->getType());
             i->use();
         }
     }
@@ -64,7 +65,7 @@ void World::update()
 
     if (_frameCounterItem > _frameItem)
     {
-        _items.push_back(new Item(Item::MORE_FIRE, sf::Vector2f(2000, dist_spawn(gen))));
+        _items.push_back(new Item(static_cast<Item::TYPE>(dist_type(gen)), sf::Vector2f(2000, dist_spawn(gen))));
         _frameItem = dist_time(gen);
         _frameCounterItem = 0;
     }
